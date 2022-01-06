@@ -4,12 +4,13 @@
 #
 Name     : sphinx-autobuild
 Version  : 2021.3.14
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/df/a5/2ed1b81e398bc14533743be41bf0ceaa49d671675f131c4d9ce74897c9c1/sphinx-autobuild-2021.3.14.tar.gz
 Source0  : https://files.pythonhosted.org/packages/df/a5/2ed1b81e398bc14533743be41bf0ceaa49d671675f131c4d9ce74897c9c1/sphinx-autobuild-2021.3.14.tar.gz
 Summary  : Rebuild Sphinx documentation on changes, with live-reload in the browser.
 Group    : Development/Tools
 License  : MIT
+Requires: sphinx-autobuild-bin = %{version}-%{release}
 Requires: sphinx-autobuild-license = %{version}-%{release}
 Requires: sphinx-autobuild-python = %{version}-%{release}
 Requires: sphinx-autobuild-python3 = %{version}-%{release}
@@ -19,6 +20,15 @@ BuildRequires : pypi(flit_core)
 %description
 # sphinx-autobuild
 Rebuild Sphinx documentation on changes, with live-reload in the browser.
+
+%package bin
+Summary: bin components for the sphinx-autobuild package.
+Group: Binaries
+Requires: sphinx-autobuild-license = %{version}-%{release}
+
+%description bin
+bin components for the sphinx-autobuild package.
+
 
 %package license
 Summary: license components for the sphinx-autobuild package.
@@ -59,7 +69,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1637339504
+export SOURCE_DATE_EPOCH=1641429194
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -69,20 +79,24 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sphinx-autobuild
 cp %{_builddir}/sphinx-autobuild-2021.3.14/LICENSE %{buildroot}/usr/share/package-licenses/sphinx-autobuild/8093604dc0459c72dacab07a5a862b89708940d2
-python3 -tt setup.py build  install --root=%{buildroot}
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/sphinx-autobuild
 
 %files license
 %defattr(0644,root,root,0755)
