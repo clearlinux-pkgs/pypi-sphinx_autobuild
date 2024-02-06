@@ -1,5 +1,5 @@
 PKG_NAME := pypi-sphinx_autobuild
-URL = https://files.pythonhosted.org/packages/df/a5/2ed1b81e398bc14533743be41bf0ceaa49d671675f131c4d9ce74897c9c1/sphinx-autobuild-2021.3.14.tar.gz
+URL = https://files.pythonhosted.org/packages/06/31/47bbd8d10b673aa5abba794c4424e58b245d1c5b0d016081913555c24357/sphinx_autobuild-2024.2.4.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
