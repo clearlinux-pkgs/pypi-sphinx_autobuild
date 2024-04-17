@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : pypi-sphinx_autobuild
-Version  : 2024.4.13
-Release  : 17
-URL      : https://files.pythonhosted.org/packages/a1/4e/77c2f38f3fa862583e1f86fa4e9020f7c9f32199b06de46d7e3e09e3107f/sphinx_autobuild-2024.4.13.tar.gz
-Source0  : https://files.pythonhosted.org/packages/a1/4e/77c2f38f3fa862583e1f86fa4e9020f7c9f32199b06de46d7e3e09e3107f/sphinx_autobuild-2024.4.13.tar.gz
+Version  : 2024.4.16
+Release  : 18
+URL      : https://files.pythonhosted.org/packages/d2/bc/8016eee9ffb86069ae7e658c136bad31a9854b476a212492b5aab4d4d5f6/sphinx_autobuild-2024.4.16.tar.gz
+Source0  : https://files.pythonhosted.org/packages/d2/bc/8016eee9ffb86069ae7e658c136bad31a9854b476a212492b5aab4d4d5f6/sphinx_autobuild-2024.4.16.tar.gz
 Summary  : Rebuild Sphinx documentation on changes, with hot reloading in the browser.
 Group    : Development/Tools
 License  : MIT
@@ -66,6 +66,7 @@ Requires: pypi(colorama)
 Requires: pypi(sphinx)
 Requires: pypi(starlette)
 Requires: pypi(uvicorn)
+Requires: pypi(watchfiles)
 Requires: pypi(websockets)
 
 %description python3
@@ -73,10 +74,10 @@ python3 components for the pypi-sphinx_autobuild package.
 
 
 %prep
-%setup -q -n sphinx_autobuild-2024.4.13
-cd %{_builddir}/sphinx_autobuild-2024.4.13
+%setup -q -n sphinx_autobuild-2024.4.16
+cd %{_builddir}/sphinx_autobuild-2024.4.16
 pushd ..
-cp -a sphinx_autobuild-2024.4.13 buildavx2
+cp -a sphinx_autobuild-2024.4.16 buildavx2
 popd
 
 %build
@@ -84,7 +85,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713038448
+export SOURCE_DATE_EPOCH=1713367554
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
